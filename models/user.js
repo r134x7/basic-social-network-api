@@ -15,12 +15,19 @@ const userSchema = new Schema(
         unique: true,
         // insert custom validator
     },
-    thoughts: {
-        // array of _id values referencing the thought model...
-    },
-    friends: {
-        // array of _id values referencing the user model...
-    }
+    thoughts:
+        [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'thought',
+            },
+        ],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            // referencing friends...
+        },
+    ],
   },
   {
     // creating virtuals for friendCount
@@ -32,6 +39,11 @@ const userSchema = new Schema(
 );
 
 // create virtual here
+userSchema
+  .virtual('friendCount')
+  .get(function () {
+    return this.friends.length;
+  });
 
 // Initialize our User model
 const User = model('user', userSchema);
