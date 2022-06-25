@@ -1,8 +1,9 @@
-const { connect, connection } = require('mongoose');
+const mongoose = require('mongoose');
 
-connect('mongodb://localhost/developersApplications', {
+mongoose.connect('mongodb://localhost:27017/insertDBnamehere', { // need to set DB name.......
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-module.exports = connection;
+
+module.exports = mongoose.connection;
