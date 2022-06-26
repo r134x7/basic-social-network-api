@@ -45,5 +45,34 @@ module.exports = {
           )
       .catch((err) => res.status(500).json(err));
   },
-    // need to add reactions post and delete
+    createReaction(req, res) {
+      Thought.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $addToSet: { reactions: req.body } }, // should create a reaction according to API parameters needed...
+          { runValidators: true, new: true }
+        )
+          .then((reaction) =>
+            !reaction
+              ? res
+                  .status(404)
+                  .json({ message: 'No reaction found with that ID' })
+              : res.json(reaction)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+    removeReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { reactions: req.params.reactionId } }, // assuming reactions can be removed this way according to API parameters needed...
+            { runValidators: true, new: true }
+          )
+            .then((user) =>
+              !user
+                ? res
+                    .status(404)
+                    .json({ message: 'No reaction found with that ID' })
+                : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+        }
 };
