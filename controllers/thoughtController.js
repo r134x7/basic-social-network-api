@@ -23,6 +23,27 @@ module.exports = {
           .then((thought) => res.json(thought))
           .catch((err) => res.status(500).json(err));
       },
-    //need update thought: find one and update
-    // need delete thought
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtId },
+          { $set: req.body }, //  should change the thoughtText
+          { runValidators: true, new: true }
+        )
+          .then((thought) =>
+            !thought
+              ? res.status(404).json({ message: 'No thought with this id!' })
+              : res.json(thought)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+        .then((thought) =>
+            !thought
+              ? res.status(404).json({ message: 'No thought with this id!' })
+              : res.json(thought)
+          )
+      .catch((err) => res.status(500).json(err));
+  },
+    // need to add reactions post and delete
 };
