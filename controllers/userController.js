@@ -23,9 +23,30 @@ module.exports = {
           .then((user) => res.json(user))
           .catch((err) => res.status(500).json(err));
       },
-    //need update user: find one and update
-    // need delete user
-    // need to remove user's associated users when user is deleted
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $set: req.body }, // can change username or email I assume, must ensure only those can change 
+          { runValidators: true, new: true }
+        )
+          .then((user) =>
+            !user
+              ? res.status(404).json({ message: 'No user with this id!' })
+              : res.json(user)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+    deleteUser(req, res) {
+        User.findOneAndDelete({ _id: req.params.userId })
+        .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } }) // should delete associated thoughts of user
+      )
+      .then(() => res.json({ message: 'User and user\'s thoughts deleted!' }))
+      .catch((err) => res.status(500).json(err));
+  },
+    
     //need to:
     // /api/users/:userId/friends/:friendId
     // post and delete needs to be made
