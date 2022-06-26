@@ -1,10 +1,10 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 // create a subdocument
 const reactionsSchema = new mongoose.Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
-        // need to set default value to a new ObjectId
+        default: () => new Types.ObjectId(),
     },
     reactionBody: {
         type: String,
