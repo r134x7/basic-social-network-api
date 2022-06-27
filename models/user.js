@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema(
         required: true,
         unique: true,
         // insert custom validator
+        validate: { // source: https://mongoosejs.com/docs/validation.html#built-in-validators
+          validator: function(email) {
+            return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(email);
+          },
+          message: foo => `${foo.value} is not a valid email address...`
+        },
     },
     thoughts:
         [
