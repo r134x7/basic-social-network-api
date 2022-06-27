@@ -19,6 +19,9 @@ const reactionsSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
         // create getter method to format the timestamp on query...
+        get: () => { // using arrow function here instead to test what works
+            return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
+        }
     }
 })
 
@@ -35,6 +38,9 @@ const thoughtSchema = new mongoose.Schema(
         type: Date,
         default: Date.now,
         // create getter method to format the timestamp on query...
+        get: function timeFormat() {
+            return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
+        }
     },
     username: {
                 type: String,
@@ -46,6 +52,7 @@ const thoughtSchema = new mongoose.Schema(
     // creating virtuals for reactionCount
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
@@ -61,6 +68,6 @@ thoughtSchema
 // Initialize our thought model
 const Thought = mongoose.model('thought', thoughtSchema);
 
-
+// `${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
 
 module.exports = Thought;
