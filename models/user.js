@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create User model
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: { 
         type: String,
@@ -52,6 +52,6 @@ userSchema
   });
 
 // Initialize our User model
-const User = mongoose.model('user', userSchema);
+const User = model('user', userSchema);
 
 module.exports = User;

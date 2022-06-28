@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 
 // create a subdocument
-const reactionsSchema = new mongoose.Schema({
+const reactionsSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId(),
@@ -26,7 +26,7 @@ const reactionsSchema = new mongoose.Schema({
 })
 
 // Schema to create thought model
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: { 
         type: String,
@@ -66,7 +66,7 @@ thoughtSchema
   });
 
 // Initialize our thought model
-const Thought = mongoose.model('thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 // `${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
 
