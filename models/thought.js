@@ -1,5 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 
+// const test = () => `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}` // using arrow function here instead to test what works
+
 // create a subdocument
 const reactionsSchema = new Schema({
     reactionId: {
@@ -18,12 +20,15 @@ const reactionsSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // create getter method to format the timestamp on query...
-        get: () => { // using arrow function here instead to test what works
-            `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
-        }
-    }
-})
+        get: timeFormat
+      },
+},
+    {
+    toJSON: {
+        getters: true,
+      },
+    id: false,
+    })
 
 // Schema to create thought model
 const thoughtSchema = new Schema(
@@ -37,10 +42,7 @@ const thoughtSchema = new Schema(
     createdAt: {
         type: Date,
         default: Date.now,
-        // create getter method to format the timestamp on query...
-        // get: function timeFormat() {
-            // return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
-        // }
+        get: timeFormat
     },
     username: {
                 type: String,
@@ -70,6 +72,11 @@ thoughtSchema
   .get(function () {
     return this.reactions.length;
   });
+
+function timeFormat(createdAt) { //getter function
+    return `${createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
+}
+
 
 // Initialize our thought model
 const Thought = model('thought', thoughtSchema);
