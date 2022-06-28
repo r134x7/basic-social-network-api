@@ -18,11 +18,6 @@ module.exports = {
           )
           .catch((err) => res.status(500).json(err));
       },
-    // createThought(req, res) {
-    //     Thought.create(req.body)
-    //       .then((thought) => res.json(thought))
-    //       .catch((err) => res.status(500).json(err));
-    //   },
     createThought(req, res) {
       Thought.create(req.body)
         .then((thought) => {
@@ -32,7 +27,7 @@ module.exports = {
             { new: true }
           );
         })
-        .then((thought) => res.json(thought))
+        .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
     updateThought(req, res) {
