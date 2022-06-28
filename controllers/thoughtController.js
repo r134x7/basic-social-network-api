@@ -18,11 +18,23 @@ module.exports = {
           )
           .catch((err) => res.status(500).json(err));
       },
+    // createThought(req, res) {
+    //     Thought.create(req.body)
+    //       .then((thought) => res.json(thought))
+    //       .catch((err) => res.status(500).json(err));
+    //   },
     createThought(req, res) {
-        Thought.create(req.body)
-          .then((thought) => res.json(thought))
-          .catch((err) => res.status(500).json(err));
-      },
+      Thought.create(req.body)
+        .then((thought) => {
+          return User.findOneAndUpdate( // will tie the post to the user
+            { _id: req.body.userId },
+            { $addToSet: { thoughts: thought._id } },
+            { new: true }
+          );
+        })
+        .then((thought) => res.json(thought))
+        .catch((err) => res.status(500).json(err));
+    },
     updateThought(req, res) {
         Thought.findOneAndUpdate(
           { _id: req.params.thoughtId },

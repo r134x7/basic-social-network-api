@@ -1,7 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
 
-// const test = () => `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}` // using arrow function here instead to test what works
-
 // create a subdocument
 const reactionsSchema = new Schema({
     reactionId: {
@@ -49,12 +47,6 @@ const thoughtSchema = new Schema(
                 required: true,
             },
     reactions: [reactionsSchema],
-    userId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-      },
-    ],
   },
   {
     // creating virtuals for reactionCount
@@ -77,10 +69,7 @@ function timeFormat(createdAt) { //getter function
     return `${createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
 }
 
-
 // Initialize our thought model
 const Thought = model('thought', thoughtSchema);
-
-// `${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
 
 module.exports = Thought;
