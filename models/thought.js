@@ -20,7 +20,7 @@ const reactionsSchema = new Schema({
         default: Date.now,
         // create getter method to format the timestamp on query...
         get: () => { // using arrow function here instead to test what works
-            return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
+            `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
         }
     }
 })
@@ -38,15 +38,21 @@ const thoughtSchema = new Schema(
         type: Date,
         default: Date.now,
         // create getter method to format the timestamp on query...
-        get: function timeFormat() {
-            return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
-        }
+        // get: function timeFormat() {
+            // return `${this.createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${this.createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
+        // }
     },
     username: {
                 type: String,
                 required: true,
             },
     reactions: [reactionsSchema],
+    userId: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    ],
   },
   {
     // creating virtuals for reactionCount
