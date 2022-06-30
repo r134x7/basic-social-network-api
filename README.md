@@ -4,7 +4,7 @@
 
   # Description
   
-  A NoSQL database using Mongoose to store user data, their posts, and reactions to posts. Requires Node.js to run.
+  An API using a NoSQL database via NPM Mongoose to do CRUD operations for users, posts, reactions and friends lists. Requires Node.js to run.
 
   # Table of Contents
   
@@ -15,11 +15,13 @@
 
   # Installation
   
-  Node.js and the NPM packages express and mongoose are required to run this while using Insomnia. MongoDB and MongoDB Compass are needed for the database.
+  Node.js and the NPM packages express and mongoose are required to run this. MongoDB and MongoDB Compass are needed for the database. Insomnia is used to run test
 
   # Usage
   
-  ![alt text](assets/images/image.png)
+  [Part 1 of a video demonstrating the API](https://www.youtube.com/watch?v=E4MoXy3fkX4)  
+
+  [Part 2 of a video demonstrating the API](https://www.youtube.com/watch?v=n-qWKbmBLww)
   
   
 

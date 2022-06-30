@@ -14,16 +14,16 @@ connection.once('open', async () => {
 
   for (let index = 0; index < usernames.length; index++) {
     
-    users.push({
+    users.push({ // pushes usernames and emails from the data.js into users array
         username: usernames[index],
         email: email[index], 
     })
     
   }
 
-  await User.collection.insertMany(users); // inserts users to the User schema
+  await User.collection.insertMany(users); // inserts the users array to the User schema
 
-  // Log out the seed data to indicate what should appear in the database
+  // console log the seed data to indicate what should appear in the database
   console.table(users);
   console.info('Seeding complete! 🌱');
   process.exit(0);

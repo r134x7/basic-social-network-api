@@ -7,7 +7,7 @@ const {
   deleteUser,
   addFriend,
   removeFriend,
-} = require('../../controllers/userController');
+} = require('../../controllers/userController'); // retrieves all the CRUD actions from the userController
 
 // /api/users
 router.route('/').get(getUsers).post(createUser);

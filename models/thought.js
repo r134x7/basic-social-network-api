@@ -65,7 +65,7 @@ thoughtSchema
     return this.reactions.length;
   });
 
-function timeFormat(createdAt) { //getter function
+function timeFormat(createdAt) { // getter function to format timestamps
     return `${createdAt.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${createdAt.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'})}`
 }
 

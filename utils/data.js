@@ -1,23 +1,15 @@
 const usernames = [
-    "Testone",
-    "Testtwo",
-    "Testthree",
-    "Testfour",
-    "Testfive",
-    "Testsix",
-    "Testseven",
-    "Testeight",
+    "Homer",
+    "Moe",
+    "Barney",
+    "Joey Jojo",
 ];
 
 const email = [
-    "testone@email.com",
-    "testtwo@email.com",
-    "testthree@email.com",
-    "testfour@email.com",
-    "testfive@email.com",
-    "testsix@email.com",
-    "testseven@email.com",
-    "testeight@email.com",
+    "homer@gmail.com",
+    "moe@aol.com",
+    "barney@email.com",
+    "joeyjojo@mail.com",
 ];
 
 module.exports = { usernames, email };
